@@ -1,3 +1,4 @@
+jQuery.ajaxSetup({ cache: false });
 var database = {};
 loadData();
 
