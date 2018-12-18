@@ -1,0 +1,49 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/> 
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Matura Themenziehung</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    
+    <link href="css/matura.css" rel="stylesheet">
+
+  </head>
+  <body>
+        <div class="container">
+
+                <button id="refreshbutton" class="btn btn-success" onClick="location.reload();">Reset <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span></button>
+
+            <div class="jumbotron">
+                    <h1 class="display-4">Ziehung der Maturathemen</h1>
+                    <p class="lead">Wählen Sie ein Fach</p>
+                    <hr class="my-4">
+                    <p>
+                            <select class="form-control" id="subjects">
+                            </select>
+                    </p>
+                    <p class="lead text-center">
+                        <a class="btn btn-primary btn-lg" href="#" onClick="ziehung();return false;" role="button">Zufallsgenerator starten</a>
+                    </p>
+
+                    <div id="output" class="">
+
+                    </div>
+            </div>
+        </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/node_modules/shuffle-text/build/shuffle-text.min.js"></script>
+    <script src="js/matura.js"></script>
+  </body>
+</html>
