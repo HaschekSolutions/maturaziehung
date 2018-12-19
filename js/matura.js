@@ -13,10 +13,11 @@ function ziehung()
     var topic2 = topics[r2];
     console.log("Topic1 ("+r1+"): "+topic1);
     console.log("Topic2 ("+r2+"): "+topic2);
-    while(topic2==topic1)
+    while(r2==r1)
     {
-        topic2 = topics[Math.floor(Math.random()*Object.keys(topics).length)];
-        console.log("oops, topic2 == topic1. Reshuffling. Topic2: "+topic2);
+        r2 = (Math.floor(Math.random()*Object.keys(topics).length)+1);
+        topic2 = topics[r2];
+        console.log("oops, topic2 == topic1. Reshuffling. Topic2: ("+r2+") "+topic2);
     }
 
     $("#output").html("<h2>Gezogene Themen:</h2> <h3><ol><li id='topic1'>Thema #"+r1+": "+topic1+"</li><li id='topic2'>Thema #"+r2+": "+topic2+"</li></ol></h3>")
