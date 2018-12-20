@@ -1,10 +1,22 @@
 jQuery.ajaxSetup({ cache: false });
 var database = {};
+var selectedsubject = undefined;
 loadData();
+
+$('#subjects').on('change', function() {
+    var hash = this.value;
+    if(hash!==undefined)
+    {
+        selectedsubject = hash;
+        $("#subjectwrapper").html("<h2>Fach: "+database.subjects[hash]+"</h2>");
+        $("#buttonwrapper").fadeIn();
+    }
+});
 
 function ziehung()
 {
-    var subj = $("#subjects").val();
+    $("#ziehungbutton").fadeOut();
+    var subj = selectedsubject;
     var topics = database[subj].topics;
     console.log(Object.keys(topics).length);
     var r1 = (Math.floor(Math.random()*Object.keys(topics).length)+1);

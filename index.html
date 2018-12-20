@@ -27,14 +27,16 @@
             <div class="jumbotron">
                 
                     <h1 class="display-4">Ziehung der Maturathemen</h1>
-                    <p class="lead">Wählen Sie ein Fach</p>
                     <hr class="my-4">
-                    <p>
+                    
+                    <div id="subjectwrapper">
+                        <p class="lead">Bitte wählen Sie ein Fach</p>
                             <select class="form-control" id="subjects">
+                              <option>--- Fach auswählen ---</option>
                             </select>
-                    </p>
-                    <p class="lead text-center">
-                        <a class="btn btn-primary btn-lg" href="#" onClick="ziehung();return false;" role="button">Zufallsgenerator starten</a>
+                    </div>
+                    <p class="lead text-center" style="display:none" id="buttonwrapper">
+                        <a id="ziehungbutton" class="btn btn-primary btn-lg" href="#" onClick="ziehung();return false;" role="button">Zufallsgenerator starten</a>
                     </p>
 
                     <div id="output" class="">
