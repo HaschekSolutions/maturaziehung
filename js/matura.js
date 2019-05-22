@@ -37,7 +37,7 @@ function ziehung()
         console.log("oops, topic2 == topic1. Reshuffling. Topic2: ("+r2+") "+topic2);
     }
 
-    $("#output").html("<h2>Gezogene Themen:</h2> <h3><ol><li id='topic1'>Thema #"+r1+": "+topic1+"</li><li id='topic2'>Thema #"+r2+": "+topic2+"</li></ol></h3>")
+    $("#output").html("<h2>Gezogene Themen:</h2> <h3><ol><li id='topic1'>Thema "+r1+": "+topic1+"</li><li id='topic2'>Thema #"+r2+": "+topic2+"</li></ol></h3>")
 
     var el = document.getElementById("topic1");
     var text = new ShuffleText(el);
