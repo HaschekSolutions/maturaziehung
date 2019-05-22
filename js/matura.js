@@ -3,6 +3,11 @@ var database = {};
 var selectedsubject = undefined;
 loadData();
 
+window.addEventListener('beforeunload', (event) => {
+    event.preventDefault();
+    event.returnValue = '';
+});
+
 $('#subjects').on('change', function() {
     var hash = this.value;
     if(hash!==undefined)
