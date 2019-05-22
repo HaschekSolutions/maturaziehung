@@ -12,7 +12,8 @@ foreach($lines as $line)
     if($a[0])
     {
         $subj = $a[0];
-        $hash = 't'.md5($subj);
+        //$hash = 't'.md5($subj);
+        $hash =  preg_replace("/[^A-Za-z0-9 ]/", '', $subj);
         $data[$hash]['name'] = $subj;
         $data['subjects'][$hash] = $subj;
     }
@@ -20,5 +21,7 @@ foreach($lines as $line)
     $topic = $a[1];
     $data[$hash]['topics'][$num] = $topic;
 }
+
+ksort($data);
 
 file_put_contents($out,json_encode($data));
