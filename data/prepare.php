@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 $in = 'themenpool.csv';
 $out= 'database.json';
