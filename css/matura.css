@@ -1,8 +1,368 @@
-#refreshbutton
-{
+/* ===== Base Overrides ===== */
+#refreshbutton {
     float: right;
 }
 
-#topic1,#topic2{
-    font-size:50px;
+/* ===== Subject Selection Styling ===== */
+#subjects {
+    font-size: 18px;
+    padding: 10px 14px;
+    height: auto;
+    border-radius: 8px;
+    border: 2px solid #337ab7;
+    transition:
+        border-color 0.3s,
+        box-shadow 0.3s;
+    -webkit-appearance: menulist;
+    -moz-appearance: menulist;
+    appearance: menulist;
+}
+
+#subjects:focus {
+    border-color: #286090;
+    box-shadow: 0 0 12px rgba(51, 122, 183, 0.5);
+    outline: none;
+}
+
+/* ===== Draw Button Enhancement ===== */
+#ziehungbutton {
+    position: relative;
+    overflow: hidden;
+    font-size: 22px;
+    padding: 16px 40px;
+    border-radius: 50px;
+    background: linear-gradient(135deg, #337ab7, #286090);
+    border: none;
+    box-shadow: 0 4px 15px rgba(51, 122, 183, 0.4);
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+#ziehungbutton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(51, 122, 183, 0.6);
+    background: linear-gradient(135deg, #286090, #1e4c76);
+}
+
+#ziehungbutton:active {
+    transform: translateY(0);
+}
+
+/* Shimmer effect on the button */
+#ziehungbutton::after {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        to right,
+        transparent 0%,
+        rgba(255, 255, 255, 0.15) 50%,
+        transparent 100%
+    );
+    transform: rotate(30deg);
+    animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%) rotate(30deg);
+    }
+    100% {
+        transform: translateX(100%) rotate(30deg);
+    }
+}
+
+/* ===== Loader (shown during shuffle) ===== */
+.loader-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    animation: fadeIn 0.3s ease;
+}
+
+.spinner {
+    width: 80px;
+    height: 80px;
+    border: 6px solid rgba(255, 255, 255, 0.2);
+    border-top-color: #5bc0de;
+    border-right-color: #337ab7;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+.spinner-text {
+    color: #fff;
+    font-size: 22px;
+    margin-top: 20px;
+    letter-spacing: 3px;
+    animation: pulse 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes pulse {
+    0%,
+    100% {
+        opacity: 0.6;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* ===== Output Area ===== */
+#output h2.result-heading {
+    text-align: center;
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 30px;
+    opacity: 0;
+    animation: slideDownFadeIn 0.6s ease forwards;
+}
+
+/* ===== Topic Cards ===== */
+.topic-card {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 16px;
+    padding: 30px 36px;
+    margin: 20px auto;
+    max-width: 700px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    border-left: 6px solid #337ab7;
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+}
+
+.topic-card.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    animation: cardReveal 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.topic-card.card-1 {
+    border-left-color: #337ab7;
+}
+
+.topic-card.card-2 {
+    border-left-color: #5cb85c;
+}
+
+/* Shimmer inside card during shuffle */
+.topic-card .card-shimmer {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(51, 122, 183, 0.08),
+        transparent
+    );
+    animation: cardShimmer 1.5s ease-in-out infinite;
+}
+
+.topic-card.card-2 .card-shimmer {
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(92, 184, 92, 0.08),
+        transparent
+    );
+}
+
+@keyframes cardShimmer {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+.topic-card .topic-number {
+    display: inline-block;
+    background: #337ab7;
+    color: #fff;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 50%;
+    font-size: 18px;
+    font-weight: bold;
+    margin-right: 16px;
+    vertical-align: middle;
+}
+
+.topic-card.card-2 .topic-number {
+    background: #5cb85c;
+}
+
+.topic-card .topic-text {
+    font-size: 22px;
+    color: #333;
+    vertical-align: middle;
+    line-height: 1.5;
+    display: inline-block;
+    width: calc(100% - 60px);
+}
+
+/* Subtle flicker while cycling */
+.topic-card.cycling .topic-text {
+    transition: opacity 0.08s;
+}
+
+.topic-card.cycling .topic-number {
+    animation: numberPulse 0.3s ease-in-out infinite;
+}
+
+@keyframes numberPulse {
+    0%,
+    100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.6;
+    }
+}
+
+/* Locked-in stamp animation */
+.topic-card.locked {
+    animation: lockStamp 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes lockStamp {
+    0% {
+        transform: scale(1);
+    }
+    30% {
+        transform: scale(0.97);
+    }
+    60% {
+        transform: scale(1.01);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Ring pulse radiating from the number badge when locked */
+.topic-card.locked .topic-number::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 40px;
+    height: 40px;
+    margin-top: -20px;
+    margin-left: -20px;
+    border-radius: 50%;
+    border: 2px solid currentColor;
+    opacity: 0;
+    animation: badgeRingPulse 0.6s ease-out forwards;
+}
+
+.topic-card .topic-number {
+    position: relative;
+}
+
+@keyframes badgeRingPulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.6;
+    }
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+/* Glow after reveal */
+.topic-card.revealed {
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.12),
+        0 0 30px rgba(51, 122, 183, 0.15);
+    transition: box-shadow 0.5s ease;
+}
+
+.topic-card.card-2.revealed {
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.12),
+        0 0 30px rgba(92, 184, 92, 0.15);
+}
+
+@keyframes cardReveal {
+    0% {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes slideDownFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== Responsive Tweaks ===== */
+@media (max-width: 600px) {
+    .topic-card {
+        padding: 20px;
+        margin: 15px 10px;
+    }
+
+    .topic-card .topic-text {
+        font-size: 18px;
+        width: calc(100% - 56px);
+    }
+
+    .topic-card .topic-number {
+        width: 36px;
+        height: 36px;
+        line-height: 36px;
+        font-size: 16px;
+    }
+
+    #ziehungbutton {
+        font-size: 18px;
+        padding: 14px 30px;
+    }
 }

@@ -1,25 +1,28 @@
 <?php 
 
-$in = 'themenpool.csv';
+$in = 'themenpool.tsv';
 $out= 'database.json';
 
 $lines = file($in);
 
-foreach($lines as $line)
+foreach($lines as $key =>$line)
 {
+    if($key==0) continue; // skip first line
     $line = trim($line);
-    $a = explode(';',$line);
-    if($a[0])
+    $a = explode("\t",$line);
+    $subj = $a[2];
+
+    $hash =  strtolower(preg_replace("/[^A-Za-z0-9 ]/", '', $subj));
+    $data[$hash]['name'] = $subj;
+    $data['subjects'][$hash] = $subj;
+
+    for($i=1;$i<=18;$i++)
     {
-        $subj = $a[0];
-        //$hash = 't'.md5($subj);
-        $hash =  strtolower(preg_replace("/[^A-Za-z0-9 ]/", '', $subj));
-        $data[$hash]['name'] = $subj;
-        $data['subjects'][$hash] = $subj;
+        $ri = $i+2; //real index
+        if($a[$ri]=='') continue;
+        $data[$hash]['topics'][$i] = $a[$ri];
     }
-    $num = $a[2];
-    $topic = $a[1];
-    $data[$hash]['topics'][$num] = $topic;
+
 }
 
 ksort($data['subjects']);
